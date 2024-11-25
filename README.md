@@ -1,17 +1,26 @@
 # prefect-fivetran
 
+<p align="center">
+    <a href="https://pypi.python.org/pypi/prefect-fivetran/" alt="PyPI version">
+        <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-fivetran?color=26272B&labelColor=090422"></a>
+    <a href="https://github.com/fivetran/prefect-fivetran/" alt="Stars">
+        <img src="https://img.shields.io/github/stars/fivetran/prefect-fivetran?color=26272B&labelColor=090422"2" /></a>
+    <a href="https://pepy.tech/badge/prefect-fivetran/" alt="Downloads">
+        <img src="https://img.shields.io/pypi/dm/prefect-fivetran?color=26272B&labelColor=090422"" /></a>
+    <a href="https://github.com/fivetran/prefect-fivetran/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/fivetran/prefect-fivetran?color=26272B&labelColor=090422"2" /></a>
+    <br>
+</p>
+
 ## Welcome!
 
 Prefect integrations with Fivetran
-
-### Disclaimer:
-Please note that Fivetran no longer officially supports or maintains this repository. If a customer needs to add or modify something here, they will need to make a fork and work with it on their own. This repository is being left public and accessible for the benefit of customers who have built services around this product. Any edits or modifications are the sole responsibility of the modifying party.
 
 ## Getting Started
 
 ### Python setup
 
-Requires an installation of Python 3.7+.
+Requires an installation of Python 3.8+.
 
 We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
 

@@ -11,7 +11,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
   logo:
-    img/prefect-logo-white.png
+    img/prefect-logo-mark.png
   font:
     text: Inter
     code: Source Code Pro
@@ -51,4 +51,3 @@ nav:
     - Connectors: connectors.md
     - Clients: clients.md
     - Credentials: credentials.md
-
