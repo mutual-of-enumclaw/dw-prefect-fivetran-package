@@ -8,6 +8,8 @@ def prefect_db():
         yield
 
 
+#removed as Prefect 3.x no longer needs to reset global state anymore. 
+'''
 @pytest.fixture(autouse=True)
 def reset_object_registry():
     """
@@ -17,3 +19,4 @@ def reset_object_registry():
 
     with PrefectObjectRegistry():
         yield
+'''

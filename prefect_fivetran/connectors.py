@@ -195,13 +195,14 @@ async def start_fivetran_connector_sync(
 
         last_sync = (
             succeeded_at
-            if fivetran_client.parse_timestamp(succeeded_at)
-            > fivetran_client.parse_timestamp(failed_at)
+            if await fivetran_client.parse_timestamp(succeeded_at)
+            > await fivetran_client.parse_timestamp(failed_at)
             else failed_at
         )
         await fivetran_client.force_connector(connector_id=connector_id)
 
-        return last_sync
+        return {"last_sync": last_sync,
+                "sync_response": connector_details["status"]["setup_state"]}
 
 
 @task(
@@ -267,16 +268,16 @@ async def wait_for_fivetran_connector_sync(
             current_details = (
                 await fivetran_client.get_connector(connector_id=connector_id)
             )["data"]
-            succeeded_at = fivetran_client.parse_timestamp(
+            succeeded_at = await fivetran_client.parse_timestamp(
                 current_details["succeeded_at"]
             )
-            failed_at = fivetran_client.parse_timestamp(current_details["failed_at"])
+            failed_at = await fivetran_client.parse_timestamp(current_details["failed_at"])
             current_completed_at = (
                 succeeded_at if succeeded_at > failed_at else failed_at
             )
             # The only way to tell if a sync failed is to check if its latest failed_at
             # value is greater than then last known "sync completed at" value.
-            if failed_at > fivetran_client.parse_timestamp(previous_completed_at):
+            if failed_at > await fivetran_client.parse_timestamp(previous_completed_at["last_sync"]):
                 raise ValueError(
                     f'Fivetran sync for connector "{connector_id}" failed. '
                     f'Please see logs at https://fivetran.com/dashboard/connectors/{current_details["service"]}/{current_details["schema"]}/logs'  # noqa
@@ -292,8 +293,8 @@ async def wait_for_fivetran_connector_sync(
                 )
             )
 
-            if current_completed_at > fivetran_client.parse_timestamp(
-                previous_completed_at
+            if current_completed_at > await fivetran_client.parse_timestamp(
+                previous_completed_at["last_sync"]
             ):
                 loop = False
             else:
