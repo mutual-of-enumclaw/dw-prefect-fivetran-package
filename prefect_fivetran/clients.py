@@ -37,7 +37,7 @@ class FivetranClient:
         }
         self.client.auth = (api_key, api_secret)
 
-    def parse_timestamp(self, api_time: str):
+    async def parse_timestamp(self, api_time: str):
         """
         Returns either the pendulum-parsed actual timestamp or
         a very out-of-date timestamp if not set
