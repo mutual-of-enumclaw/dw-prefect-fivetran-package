@@ -1,2 +1,2 @@
-prefect==3.2.15
+prefect==3.6.28.dev2
 pydantic==2.10.6
